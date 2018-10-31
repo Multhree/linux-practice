@@ -42,8 +42,11 @@ int main(int argc, char **argv)
         if (fork() == 0)
         {
             // 子进程中，读取客户端发过来的信息，处理信息，再发送给客户端
-            read(client_sockfd, &ch, 1);
-            printf("char from client  = %c\n",ch);
+            while(ch != ':')
+            {
+            	read(client_sockfd, &ch, 1);
+            	printf("char from client  = %c\n",ch); 
+            }
             sleep(1);
             ch++;
             write(client_sockfd, &ch, 1);
@@ -56,4 +59,4 @@ int main(int argc, char **argv)
             close(client_sockfd);
         }
     }
-}
+ }
